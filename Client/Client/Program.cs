@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 using System.Net.Sockets;
 using System.Text;
 
-Console.WriteLine("Hello, World!");
+ExecuteClient();
 
 static void ExecuteClient()
 {
