@@ -1,8 +1,10 @@
 ﻿using BlazorIdentity.Server.Models;
+using BlazorIdentity.Shared;
 using Duende.IdentityServer.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BlazorIdentity.Server.Data
 {
@@ -13,5 +15,13 @@ namespace BlazorIdentity.Server.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<ApplicationUser>().Navigation(e => e.SuperHeroes).AutoInclude();
+        }
+
+        public DbSet<SuperHero> SuperHeroes => Set<SuperHero>();
     }
 }
